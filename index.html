@@ -3,134 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIRU FM | DIGITAL ENGINE PRO</title>
+    <title>VIRU FM | VIRUNA RANDINU PRO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon-blue: #3b82f6; --dark-bg: #020617; }
-        body { 
-            background-color: var(--dark-bg); 
-            color: white; 
-            font-family: 'Inter', sans-serif; 
-            overflow: hidden; 
-            height: 100vh;
-        }
-
-        #particles-js {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-        }
-
-        .glass { 
-            background: rgba(15, 23, 42, 0.7); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        /* 👾 Smooth Glitch for Main Title */
-        .glitch-pro {
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #fff 20%, #3b82f6 40%, #3b82f6 60%, #fff 80%);
-            background-size: 200% auto;
-            color: #fff;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
-        }
-        @keyframes shine { to { background-position: 200% center; } }
-
-        /* 🔴 Breathing Live Animation */
-        .live-pulse {
-            animation: breathe 2s ease-in-out infinite;
-        }
-        @keyframes breathe {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.95); }
-        }
-
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        body { background-color: var(--dark-bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 2rem; }
+        .glitch-pro { font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; animation: glow 2s ease-in-out infinite alternate; }
+        @keyframes glow { from { text-shadow: 0 0 5px #fff, 0 0 10px #3b82f6; } to { text-shadow: 0 0 10px #fff, 0 0 20px #3b82f6; } }
+        .live-pulse { animation: breathe 2s ease-in-out infinite; }
+        @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .owner-card { background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.5) 100%); }
     </style>
 </head>
-<body class="flex flex-col h-screen p-2 md:p-6 overflow-hidden">
+<body class="p-4 md:p-8">
     <div id="particles-js"></div>
 
-    <div class="max-w-7xl mx-auto w-full h-full flex flex-col space-y-4">
+    <div class="max-w-7xl mx-auto space-y-6">
         
-        <header class="glass rounded-3xl p-5 flex flex-col md:flex-row justify-between items-center shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+        <header class="glass p-6 flex flex-col md:flex-row justify-between items-center shadow-2xl">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/40">
-                    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-                    </svg>
+                <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-black glitch-pro">VIRU FM PRO</h1>
-                    <p class="text-[8px] font-bold text-blue-500 uppercase tracking-[0.5em]">Digital Engine Stable Core</p>
+                    <h1 class="text-3xl font-black glitch-pro uppercase">Viru FM <span class="text-blue-500 text-xl">PRO</span></h1>
+                    <p class="text-[9px] font-bold text-blue-400 tracking-[0.5em] uppercase">Digital Engine v5.0 Master</p>
                 </div>
             </div>
-
-            <div class="flex gap-3 mt-3 md:mt-0">
-                <div class="glass px-5 py-2 rounded-xl text-center min-w-[120px] border-blue-500/30">
-                    <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Live Listeners</p>
-                    <p id="listener-count" class="text-lg font-black text-blue-400 font-mono tracking-tighter">0</p>
-                </div>
-                <div class="glass px-5 py-2 rounded-xl text-center border-blue-500/10">
-                    <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Server Status</p>
-                    <p class="text-lg font-black text-emerald-400 uppercase tracking-widest">Secure</p>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <div class="glass px-6 py-2 text-center border-blue-500/30">
+                    <p class="text-[8px] text-slate-500 font-bold uppercase tracking-widest">Live Listeners</p>
+                    <p id="listener-count" class="text-xl font-black text-blue-400 font-mono">0</p>
                 </div>
             </div>
         </header>
 
-        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            <div class="lg:col-span-8 flex flex-col space-y-4">
-                <div class="glass p-2 rounded-[2.5rem] flex-1 flex flex-col relative overflow-hidden">
-                    <div class="relative flex-1 rounded-[2rem] overflow-hidden bg-black ring-1 ring-white/5">
+            <div class="lg:col-span-8 space-y-6">
+                
+                <div class="glass p-3 relative overflow-hidden group">
+                    <div class="relative h-[400px] rounded-[1.5rem] overflow-hidden bg-black shadow-inner">
                         <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-                        
-                        <div class="absolute bottom-6 right-6 flex items-center gap-2 bg-black/60 backdrop-blur-md border border-red-600/50 px-4 py-2 rounded-full live-pulse">
-                            <span class="w-2.5 h-2.5 bg-red-600 rounded-full shadow-[0_0_10px_#dc2626]"></span>
-                            <span class="text-red-500 text-[10px] font-black uppercase tracking-[0.3em]">Live On-Air</span>
+                        <div class="absolute bottom-6 right-6 flex items-center gap-2 bg-black/60 px-4 py-2 rounded-full border border-red-500/50 live-pulse">
+                            <span class="w-2.5 h-2.5 bg-red-600 rounded-full"></span>
+                            <span class="text-red-500 text-[10px] font-black uppercase tracking-widest">Live On-Air</span>
                         </div>
                     </div>
                     
-                    <div class="p-4 flex flex-col md:flex-row gap-6 items-center">
-                        <div class="flex gap-2 w-full md:w-auto">
-                            <button onclick="playAudio()" class="px-10 py-3.5 bg-blue-600 hover:bg-blue-500 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all">Play</button>
-                            <button onclick="pauseAudio()" class="px-10 py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all">Pause</button>
-                        </div>
+                    <div class="p-6 flex flex-col md:flex-row items-center gap-6">
+                        <button onclick="playAudio()" class="w-full md:w-auto px-12 py-4 bg-blue-600 hover:bg-blue-500 rounded-2xl font-black text-[12px] uppercase tracking-tighter transition-all shadow-lg shadow-blue-600/30">Activate Stream</button>
                         <div class="flex-1 w-full space-y-2">
-                            <div class="flex justify-between text-[8px] font-black text-slate-500 uppercase">
-                                <span>Engine Output</span>
-                                <span id="vol-txt" class="text-blue-400">100%</span>
+                            <div class="flex justify-between text-[10px] font-bold text-slate-500 uppercase">
+                                <span>Core Output</span>
+                                <span id="vol-txt" class="text-blue-500">100%</span>
                             </div>
-                            <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
                         </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="glass p-6 owner-card border-l-4 border-l-blue-600 shadow-xl">
+                        <h3 class="text-blue-500 font-black text-[10px] uppercase tracking-[0.2em] mb-4">System Operator</h3>
+                        <div class="space-y-2">
+                            <p class="text-2xl font-black text-white uppercase tracking-tighter italic">VIRUNA RANDINU</p>
+                            <p class="text-slate-400 text-[11px] leading-relaxed">Designing high-performance digital broadcast systems for the VIRU FM community.</p>
+                        </div>
+                    </div>
+                    <div class="glass p-6 owner-card border-l-4 border-l-emerald-600 shadow-xl">
+                        <h3 class="text-emerald-500 font-black text-[10px] uppercase tracking-[0.2em] mb-4">Contact Protocol</h3>
+                        <ul class="text-[11px] font-bold space-y-3 text-slate-300">
+                            <li class="flex justify-between border-b border-white/5 pb-1"><span>WhatsApp</span> <span class="text-white">STATION_LIVE</span></li>
+                            <li class="flex justify-between border-b border-white/5 pb-1"><span>Email</span> <span class="text-white">VIRU_ENGINE@PRO</span></li>
+                            <li class="flex justify-between"><span>Status</span> <span class="text-emerald-400 animate-pulse">SYSTEM ONLINE</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-4 flex flex-col overflow-hidden">
-                <div class="glass flex-1 rounded-[2.5rem] flex flex-col overflow-hidden">
-                    <div class="p-4 border-b border-white/5 flex justify-between items-center bg-white/5">
-                        <span class="text-[9px] font-black uppercase tracking-[0.2em] text-blue-400">Live Communication</span>
+            <div class="lg:col-span-4 h-full">
+                <div class="glass h-[660px] flex flex-col overflow-hidden border-t-4 border-t-blue-500/50 shadow-2xl">
+                    <div class="p-4 border-b border-white/5 flex items-center justify-between bg-white/5">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-blue-400">Global Chat Hub</span>
                         <div class="w-2 h-2 bg-blue-500 rounded-full animate-ping"></div>
                     </div>
                     <div class="flex-1 p-2">
-                        <iframe src="https://www5.cbox.ws/box/?boxid=960829&boxtag=ytn5a5" width="100%" height="100%" allowtransparency="yes" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style="filter: contrast(1.1) brightness(0.95); border-radius: 1.5rem;"></iframe>
+                        <iframe src="https://www5.cbox.ws/box/?boxid=960829&boxtag=ytn5a5" width="100%" height="100%" allowtransparency="yes" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style="filter: contrast(1.1) brightness(0.9); border-radius: 1.5rem;"></iframe>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
 
-        <footer class="text-center py-3">
-            <p class="text-[9px] font-black uppercase tracking-[0.6em] text-blue-500 shadow-blue-500/20">
+        <footer class="text-center py-8">
+            <p class="text-[10px] font-black uppercase tracking-[0.8em] text-blue-500">
                 © 2026 VIRU FM DIGITAL ENGINE • ALL RIGHTS RESERVED
             </p>
         </footer>
@@ -138,45 +108,11 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#3b82f6" },
-                "opacity": { "value": 0.2 },
-                "size": { "value": 2 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 1 }
-            }
-        });
-
-        var player;
-        const VIDEO_ID = 'VgcjkB8wg8g';
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%', width: '100%', videoId: VIDEO_ID,
-                playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1, 'rel': 0, 'showinfo': 0, 'iv_load_policy': 3 },
-                events: { 'onReady': (e) => e.target.playVideo() }
-            });
-        }
+        particlesJS("particles-js", { "particles": { "number": { "value": 40 }, "color": { "value": "#3b82f6" }, "opacity": { "value": 0.2 }, "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.1 } } });
+        var player; function onYouTubeIframeAPIReady() { player = new YT.Player('player', { height: '100%', width: '100%', videoId: 'VgcjkB8wg8g', playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1 }, events: { 'onReady': (e) => e.target.playVideo() } }); }
         function playAudio() { player.playVideo(); }
-        function pauseAudio() { player.pauseVideo(); }
-        document.getElementById('volume-slider').addEventListener('input', function(e) {
-            var vol = e.target.value;
-            player.setVolume(vol);
-            document.getElementById('vol-txt').innerText = vol + '%';
-        });
-
-        // 📊 Listener Count (0 - 1250)
-        let currentListeners = Math.floor(Math.random() * 300) + 150;
-        document.getElementById('listener-count').innerText = currentListeners.toLocaleString();
-
-        setInterval(() => {
-            const change = Math.floor(Math.random() * 101) - 45; 
-            currentListeners += change;
-            if (currentListeners < 0) currentListeners = Math.floor(Math.random() * 10);
-            if (currentListeners > 1250) currentListeners = 1210;
-            document.getElementById('listener-count').innerText = currentListeners.toLocaleString();
-        }, 5000);
+        document.getElementById('volume-slider').addEventListener('input', (e) => { player.setVolume(e.target.value); document.getElementById('vol-txt').innerText = e.target.value + '%'; });
+        setInterval(() => { let c = Math.floor(Math.random() * 550) + 700; document.getElementById('listener-count').innerText = c.toLocaleString(); }, 5000);
     </script>
 </body>
 </html>
