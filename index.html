@@ -19,11 +19,11 @@
         <header class="glass p-8 rounded-[3rem] flex justify-between items-center neon-glow">
             <div class="space-y-1">
                 <h1 class="text-4xl font-black text-blue-500 italic uppercase tracking-tighter">Viru FM Pro</h1>
-                <p class="text-[10px] tracking-[0.6em] font-bold text-slate-500 uppercase">Shielded Audio Transmission</p>
+                <p class="text-[10px] tracking-[0.6em] font-bold text-slate-500 uppercase">24/7 Shielded Audio</p>
             </div>
-            <div class="flex items-center gap-4 bg-slate-900/80 px-5 py-2.5 rounded-full border border-white/5 shadow-inner">
+            <div class="flex items-center gap-4 bg-slate-900/80 px-5 py-2.5 rounded-full border border-white/5">
                 <div class="h-2 w-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]"></div>
-                <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Live Active</span>
+                <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Live Now</span>
             </div>
         </header>
 
@@ -32,6 +32,7 @@
                 <div class="glass p-6 rounded-[3.5rem] shadow-2xl">
                     <div class="relative pt-[56.25%] rounded-[2.5rem] overflow-hidden bg-black ring-1 ring-white/10 shadow-2xl">
                         <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+                        <div class="absolute inset-0 bg-transparent"></div>
                     </div>
                     
                     <div class="mt-8 p-4 space-y-8 text-center">
@@ -39,7 +40,13 @@
                             <button onclick="playAudio()" class="flex-1 bg-blue-600 hover:bg-blue-700 py-6 rounded-3xl font-black uppercase text-xs tracking-[0.2em] transition-all transform active:scale-95 shadow-xl shadow-blue-600/25">Play</button>
                             <button onclick="pauseAudio()" class="flex-1 bg-slate-800 hover:bg-slate-700 py-6 rounded-3xl font-black uppercase text-xs tracking-[0.2em] transition-all transform active:scale-95">Pause</button>
                         </div>
-                        <input type="range" id="vol" min="0" max="100" value="100" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                        <div class="space-y-4">
+                            <div class="flex justify-between text-[11px] font-black text-slate-500 uppercase tracking-widest px-1">
+                                <span>Volume Control</span>
+                                <span id="vol-txt" class="text-blue-500 font-black">100%</span>
+                            </div>
+                            <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,13 +54,13 @@
             <div class="lg:col-span-4 h-full">
                 <div class="glass p-6 rounded-[3.5rem] h-[650px] lg:h-full flex flex-col border border-white/5 shadow-2xl">
                     <div class="flex items-center justify-between mb-6 px-3">
-                        <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 italic">Community Hub</h4>
-                        <span class="text-[9px] bg-blue-600/10 text-blue-400 px-3 py-1 rounded-full font-black">ADMIN MODE</span>
+                        <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 italic">Chat Hub</h4>
+                        <span class="text-[9px] bg-blue-600/10 text-blue-400 px-3 py-1 rounded-full font-black border border-blue-500/20">ADMIN ACTIVE</span>
                     </div>
                     
                     <div class="flex-1 rounded-[2.5rem] overflow-hidden bg-slate-950/80 border border-white/5 shadow-inner">
                         <iframe 
-                            src="https://www3.cbox.ws/box/?boxid=3534575&boxtag=v8p7p7" 
+                            src="https://www5.cbox.ws/box/?boxid=960829&boxtag=ytn5a5" 
                             width="100%" 
                             height="100%" 
                             allowtransparency="yes" 
@@ -64,6 +71,7 @@
                             scrolling="auto">
                         </iframe>
                     </div>
+                    <p class="text-[9px] text-center text-slate-600 mt-6 font-bold uppercase tracking-widest italic tracking-widest">Global Transmission Verified</p>
                 </div>
             </div>
         </main>
@@ -71,16 +79,24 @@
 
     <script>
         var player;
+        const VIDEO_ID = 'VgcjkB8wg8g';
+
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '100%', width: '100%', videoId: 'VgcjkB8wg8g',
+                height: '100%', width: '100%', videoId: VIDEO_ID,
                 playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1, 'rel': 0, 'showinfo': 0 },
                 events: { 'onReady': (e) => e.target.playVideo() }
             });
         }
+
         function playAudio() { player.playVideo(); }
         function pauseAudio() { player.pauseVideo(); }
-        document.getElementById('vol').addEventListener('input', (e) => player.setVolume(e.target.value));
+
+        document.getElementById('volume-slider').addEventListener('input', function(e) {
+            var vol = e.target.value;
+            player.setVolume(vol);
+            document.getElementById('vol-txt').innerText = vol + '%';
+        });
     </script>
 </body>
 </html>
