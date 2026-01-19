@@ -8,45 +8,79 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         body { background: #020617; color: white; font-family: sans-serif; }
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
+        .neon { text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-6">
-    <div class="w-full max-w-4xl space-y-6">
-        <header class="glass p-6 rounded-3xl text-center">
-            <h1 class="text-3xl font-bold text-blue-500 italic">VIRU FM PRO</h1>
-            <p class="text-[10px] tracking-widest text-slate-500 uppercase mt-1 text-emerald-400">● System Live & Shielded</p>
+
+    <div class="w-full max-w-5xl space-y-6">
+        <header class="glass p-6 rounded-[2rem] flex justify-between items-center border border-blue-500/20">
+            <h1 class="text-3xl font-black text-blue-500 neon italic">VIRU FM PRO</h1>
+            <span class="text-xs font-bold text-emerald-400 animate-pulse">● SYSTEM ONLINE</span>
         </header>
 
-        <div class="glass p-4 rounded-[2rem] shadow-2xl">
-            <div class="relative pt-[56.25%] rounded-2xl overflow-hidden bg-black">
-                <div id="player" class="absolute top-0 left-0 w-full h-full"></div>
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-8 space-y-6">
+                <div class="glass p-4 rounded-[2.5rem] shadow-2xl">
+                    <div class="relative pt-[56.25%] rounded-3xl overflow-hidden bg-black">
+                        <div id="player" class="absolute top-0 left-0 w-full h-full"></div>
+                    </div>
+                    
+                    <div class="p-6 space-y-6">
+                        <div class="flex gap-4">
+                            <button onclick="playAudio()" class="flex-1 bg-blue-600 py-4 rounded-2xl font-black uppercase text-xs hover:bg-blue-700 transition">Play</button>
+                            <button onclick="pauseAudio()" class="flex-1 bg-slate-800 py-4 rounded-2xl font-black uppercase text-xs hover:bg-slate-700 transition">Pause</button>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                <span>Output Volume</span>
+                                <span id="vol-txt" class="text-blue-500 text-sm font-black">100%</span>
+                            </div>
+                            <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex justify-between p-6">
-                <button onclick="playAudio()" class="bg-blue-600 px-10 py-3 rounded-xl font-bold uppercase text-xs">Play</button>
-                <button onclick="pauseAudio()" class="bg-slate-800 px-10 py-3 rounded-xl font-bold uppercase text-xs">Pause</button>
-            </div>
-        </div>
 
-        <div class="glass p-4 rounded-[2rem] h-[450px] overflow-hidden">
-            <iframe src="https://www3.cbox.ws/box/?boxid=3534575&boxtag=v8p7p7" width="100%" height="100%" frameborder="0"></iframe>
-        </div>
+            <div class="lg:col-span-4">
+                <div class="glass p-4 rounded-[2.5rem] h-[600px] flex flex-col">
+                    <h4 class="text-xs font-bold text-slate-400 mb-4 px-2 tracking-widest uppercase">Live Chat</h4>
+                    <div class="flex-1 rounded-2xl overflow-hidden bg-slate-950/50">
+                        <iframe id="chat-frame" src="" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
+        // Environment Variable එකෙන් ID එක ගන්නවා, නැත්නම් default එකක් ගන්නවා
+        const VIDEO_ID = 'VgcjkB8wg8g'; 
+
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '100%', width: '100%',
-                playerVars: {
-                    'listType': 'user_uploads',
-                    'list': 'UCp7W9L6Y8D0oD-E5K_09Tnw', // මේ උඹේ Channel ID එක
-                    'autoplay': 1, 'controls': 0
-                }
+                height: '100%',
+                width: '100%',
+                videoId: VIDEO_ID,
+                playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1, 'rel': 0 },
+                events: { 'onReady': onPlayerReady }
             });
+            // Chat එකටත් ID එක දානවා
+            document.getElementById('chat-frame').src = `https://www.youtube.com/live_chat?v=${VIDEO_ID}&embed_domain=${window.location.hostname}`;
         }
+
+        function onPlayerReady(event) { event.target.playVideo(); }
         function playAudio() { player.playVideo(); }
         function pauseAudio() { player.pauseVideo(); }
+
+        document.getElementById('volume-slider').addEventListener('input', function(e) {
+            var vol = e.target.value;
+            player.setVolume(vol);
+            document.getElementById('vol-txt').innerText = vol + '%';
+        });
     </script>
 </body>
 </html>
