@@ -17,7 +17,6 @@
             height: 100vh;
         }
 
-        /* 🌌 Animated Background Particles */
         #particles-js {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
@@ -31,7 +30,6 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
         }
 
-        /* ⚡ Neon Glow Animation */
         .neon-glow {
             animation: neon-pulse 3s infinite alternate;
         }
@@ -40,7 +38,6 @@
             100% { border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
         }
 
-        /* 👾 Glitch Text Effect */
         .glitch {
             position: relative;
             font-family: 'Orbitron', sans-serif;
@@ -85,8 +82,8 @@
                     <p id="listener-count" class="text-lg font-black text-blue-400 font-mono">0</p>
                 </div>
                 <div class="glass px-5 py-2 rounded-xl text-center">
-                    <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Stream Quality</p>
-                    <p class="text-lg font-black text-emerald-400 uppercase">Ultra High</p>
+                    <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Server Status</p>
+                    <p class="text-lg font-black text-emerald-400 uppercase">Secure</p>
                 </div>
             </div>
         </header>
@@ -98,20 +95,21 @@
                     <div class="relative flex-1 rounded-[1.5rem] overflow-hidden bg-black ring-1 ring-white/10 shadow-inner">
                         <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 flex items-center gap-2">
-                            <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
-                            <span class="bg-red-600/20 text-red-500 border border-red-600/50 px-2 py-0.5 rounded text-[8px] font-black uppercase">Live On-Air</span>
+                        
+                        <div class="absolute bottom-6 right-6 flex items-center gap-2 bg-black/40 backdrop-blur-md border border-red-600/40 px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(220,38,38,0.2)]">
+                            <span class="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse shadow-[0_0_8px_#dc2626]"></span>
+                            <span class="text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">Live On-Air</span>
                         </div>
                     </div>
                     
                     <div class="p-4 flex flex-col md:flex-row gap-4 items-center bg-white/5">
                         <div class="flex gap-2 w-full md:w-auto">
                             <button onclick="playAudio()" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all shadow-lg shadow-blue-600/20">Play</button>
-                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all border border-white/5">Pause</button>
+                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">Pause</button>
                         </div>
                         <div class="flex-1 w-full space-y-1">
                             <div class="flex justify-between text-[8px] font-black text-slate-500 uppercase">
-                                <span>Master Gain Control</span>
+                                <span>Output Control</span>
                                 <span id="vol-txt" class="text-blue-400">100%</span>
                             </div>
                             <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
@@ -131,12 +129,7 @@
                     </div>
                     <div class="flex-1 p-2">
                         <div class="w-full h-full rounded-[1.2rem] overflow-hidden bg-slate-950/50">
-                            <iframe 
-                                src="https://www5.cbox.ws/box/?boxid=960829&boxtag=ytn5a5" 
-                                width="100%" height="100%" allowtransparency="yes" 
-                                frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"
-                                style="filter: contrast(1.1) brightness(0.9);">
-                            </iframe>
+                            <iframe src="https://www5.cbox.ws/box/?boxid=960829&boxtag=ytn5a5" width="100%" height="100%" allowtransparency="yes" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style="filter: contrast(1.1) brightness(0.9);"></iframe>
                         </div>
                     </div>
                 </div>
@@ -144,15 +137,12 @@
         </main>
 
         <footer class="text-center py-2">
-            <p class="text-[8px] font-bold text-slate-600 uppercase tracking-[0.6em]">
-                © 2026 VIRU FM <span class="text-blue-500">DIGITAL ENGINE</span> • ALL SYSTEMS NOMINAL
-            </p>
+            <p class="text-[8px] font-bold text-slate-600 uppercase tracking-[0.6em]">© 2026 VIRU FM <span class="text-blue-500 font-black">DIGITAL ENGINE</span> • ALL SYSTEMS NOMINAL</p>
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // --- 🌌 Particle Engine ---
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
@@ -166,7 +156,6 @@
             "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } }
         });
 
-        // --- 📺 YouTube API Engine ---
         var player;
         const VIDEO_ID = 'VgcjkB8wg8g';
         function onYouTubeIframeAPIReady() {
@@ -184,19 +173,15 @@
             document.getElementById('vol-txt').innerText = vol + '%';
         });
 
-        // --- 📊 Real-time Listener Fluctuation (0 - 1250) ---
-        let currentListeners = Math.floor(Math.random() * 300) + 200; // ආරම්භක අගය
+        // 📊 Listener Count (0 - 1250)
+        let currentListeners = Math.floor(Math.random() * 300) + 200;
         document.getElementById('listener-count').innerText = currentListeners.toLocaleString();
 
         setInterval(() => {
-            // -45 සහ +55 අතර ලොකු වෙනසක් සිදු වේ
             const change = Math.floor(Math.random() * 101) - 45; 
             currentListeners += change;
-
-            // සීමාවන්: 0 ත් 1250 ත් අතර
             if (currentListeners < 0) currentListeners = Math.floor(Math.random() * 15);
             if (currentListeners > 1250) currentListeners = 1210;
-
             document.getElementById('listener-count').innerText = currentListeners.toLocaleString();
         }, 5000);
     </script>
