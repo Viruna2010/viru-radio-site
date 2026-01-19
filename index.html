@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIRU FM PRO | OFFICIAL DASHBOARD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #020617; color: #f8fafc; overflow-x: hidden; }
+        .neon-text { font-family: 'Orbitron', sans-serif; text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+        .glass-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
+        .visualizer-bar { width: 4px; border-radius: 2px; background: #3b82f6; animation: music-flow 0.6s ease-in-out infinite alternate; }
+        @keyframes music-flow { from { height: 5px; } to { height: 35px; } }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 lg:p-10">
+
+    <div class="fixed inset-0 pointer-events-none">
+        <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-blue-900/20 rounded-full blur-[120px]"></div>
+        <div class="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-6xl space-y-6">
+        
+        <header class="flex justify-between items-center glass-card p-6 rounded-[2rem] border-blue-500/20 shadow-lg">
+            <div>
+                <h1 class="text-3xl font-black neon-text italic text-blue-500 tracking-tighter text-4xl">VIRU FM PRO</h1>
+                <p class="text-[10px] tracking-[0.4em] font-bold text-slate-500 uppercase mt-1">Advanced Community Transmission</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="h-3 w-3 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span class="text-xs font-bold text-slate-300 uppercase tracking-widest hidden sm:block">System Online</span>
+            </div>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <div class="lg:col-span-8 space-y-6">
+                <div class="glass-card p-4 rounded-[2.5rem] shadow-2xl">
+                    <div class="relative pt-[56.25%] rounded-[1.8rem] overflow-hidden bg-black">
+                        <div id="yt-engine" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 flex items-center gap-3">
+                            <span class="bg-red-600 text-[10px] font-black px-2 py-1 rounded italic uppercase tracking-widest">Live Shield</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between p-6 gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="flex gap-1 items-end h-10">
+                                <div class="visualizer-bar" style="animation-delay: 0.1s"></div>
+                                <div class="visualizer-bar" style="animation-delay: 0.3s"></div>
+                                <div class="visualizer-bar" style="animation-delay: 0.2s"></div>
+                            </div>
+                            <h3 class="font-bold text-lg uppercase italic text-slate-200">Viru FM Studio V2.5</h3>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="playAudio()" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-2xl text-xs font-black uppercase transition-all transform active:scale-95 shadow-lg shadow-blue-600/20">Play</button>
+                            <button onclick="pauseAudio()" class="bg-slate-800 hover:bg-slate-700 px-8 py-3 rounded-2xl text-xs font-black uppercase transition-all transform active:scale-95">Pause</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-[2rem] grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Master Audio Output</p>
+                        <input type="range" id="volRange" min="0" max="100" value="100" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                        <div class="flex justify-between text-[10px] font-bold text-blue-500"><span>MUTE</span><span id="volVal">100%</span></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white/5 p-4 rounded-2xl text-center">
+                            <p class="text-[9px] text-slate-500 font-bold uppercase">Format</p>
+                            <p class="text-sm font-black">240P</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-2xl text-center">
+                            <p class="text-[9px] text-slate-500 font-bold uppercase">Mode</p>
+                            <p class="text-sm font-black text-blue-400">STUDY</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 h-full">
+                <div class="glass-card p-4 rounded-[2.5rem] flex flex-col h-[650px] border-blue-500/10 shadow-2xl">
+                    <div class="flex items-center gap-2 mb-4 px-2">
+                        <div class="h-2 w-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Viru Community Chat</h4>
+                    </div>
+                    
+                    <div class="flex-1 rounded-[1.5rem] overflow-hidden bg-slate-950/50 border border-white/5">
+                        <iframe 
+                            src="https://www3.cbox.ws/box/?boxid=3534575&boxtag=v8p7p7" 
+                            width="100%" 
+                            height="100%" 
+                            allowtransparency="yes" 
+                            allow="autoplay" 
+                            frameborder="0" 
+                            scrolling="auto">
+                        </iframe>
+                    </div>
+                    <p class="text-[8px] text-center text-slate-600 mt-4 uppercase font-bold tracking-widest">Real-time global transmission active</p>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="text-center py-10 opacity-40">
+            <p class="text-[9px] font-bold uppercase tracking-[0.6em]">Architecture by Viruna Tech & Render Shield Engine</p>
+        </footer>
+    </div>
+
+    <script>
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-engine', {
+                height: '100%',
+                width: '100%',
+                playerVars: {
+                    'listType': 'user_uploads',
+                    'list': 'UCp7W9L6Y8D0oD-E5K_09Tnw', // උඹේ චැනල් ID එක
+                    'autoplay': 1,
+                    'controls': 0,
+                    'modestbranding': 1,
+                    'rel': 0
+                },
+                events: { 'onReady': onPlayerReady }
+            });
+        }
+        function onPlayerReady(event) { event.target.playVideo(); }
+        function playAudio() { player.playVideo(); }
+        function pauseAudio() { player.pauseVideo(); }
+
+        document.getElementById('volRange').addEventListener('input', function(e) {
+            var v = e.target.value;
+            player.setVolume(v);
+            document.getElementById('volVal').innerText = v + '%';
+        });
+    </script>
+</body>
+</html>
