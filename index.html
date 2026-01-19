@@ -3,62 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIRU FM PRO | OFFICIAL DASHBOARD</title>
+    <title>VIRU FM PRO | OFFICIAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
-        body { background: #020617; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
-        .neon-glow { box-shadow: 0 0 25px rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.2); }
+        body { 
+            background: radial-gradient(circle at top right, #0f172a, #020617); 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            min-height: 100 screen;
+        }
+        
+        /* Glassmorphism Effect */
+        .glass-card { 
+            background: rgba(15, 23, 42, 0.6); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(59, 130, 246, 0.2); 
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Neon Glows */
+        .neon-border { 
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); 
+            border: 1px solid rgba(59, 130, 246, 0.3); 
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Custom Scrollbar for the whole page */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+
+        /* Smooth Button Animation */
+        .btn-action {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-4 lg:p-10">
+<body class="p-4 lg:p-10">
 
-    <div class="w-full max-w-6xl space-y-8">
-        <header class="glass p-8 rounded-[3rem] flex justify-between items-center neon-glow">
-            <div class="space-y-1">
-                <h1 class="text-4xl font-black text-blue-500 italic uppercase tracking-tighter">Viru FM Pro</h1>
-                <p class="text-[10px] tracking-[0.6em] font-bold text-slate-500 uppercase">24/7 Shielded Audio</p>
+    <div class="max-w-7xl mx-auto space-y-8">
+        <header class="glass-card p-6 flex justify-between items-center neon-border">
+            <div class="flex items-center gap-4">
+                <div class="bg-blue-600 p-3 rounded-2xl shadow-lg shadow-blue-600/40">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-black italic tracking-tighter uppercase neon-text tracking-tighter font-['Montserrat']">Viru FM <span class="text-blue-500">Pro</span></h1>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">24/7 Digital Shield Active</p>
+                </div>
             </div>
-            <div class="flex items-center gap-4 bg-slate-900/80 px-5 py-2.5 rounded-full border border-white/5">
-                <div class="h-2 w-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]"></div>
-                <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Live Now</span>
+            <div class="hidden md:flex items-center gap-6">
+                <div class="text-right">
+                    <p class="text-[9px] font-black text-slate-500 uppercase">Server Status</p>
+                    <p class="text-[11px] font-bold text-emerald-400">ULTRA STABLE</p>
+                </div>
+                <div class="h-3 w-3 bg-emerald-500 rounded-full animate-ping"></div>
             </div>
         </header>
 
         <main class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-8 space-y-6">
-                <div class="glass p-6 rounded-[3.5rem] shadow-2xl">
-                    <div class="relative pt-[56.25%] rounded-[2.5rem] overflow-hidden bg-black ring-1 ring-white/10 shadow-2xl">
-                        <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
-                        <div class="absolute inset-0 bg-transparent"></div>
+                <div class="glass-card p-4 overflow-hidden shadow-2xl">
+                    <div class="relative pt-[56.25%] rounded-[2rem] overflow-hidden bg-black ring-1 ring-white/10 group">
+                        <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+                        <div class="absolute bottom-6 left-8">
+                            <span class="bg-red-600 px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-widest animate-pulse">Live</span>
+                        </div>
                     </div>
                     
-                    <div class="mt-8 p-4 space-y-8 text-center">
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                         <div class="flex gap-4">
-                            <button onclick="playAudio()" class="flex-1 bg-blue-600 hover:bg-blue-700 py-6 rounded-3xl font-black uppercase text-xs tracking-[0.2em] transition-all transform active:scale-95 shadow-xl shadow-blue-600/25">Play</button>
-                            <button onclick="pauseAudio()" class="flex-1 bg-slate-800 hover:bg-slate-700 py-6 rounded-3xl font-black uppercase text-xs tracking-[0.2em] transition-all transform active:scale-95">Pause</button>
+                            <button onclick="playAudio()" class="btn-action flex-1 bg-blue-600 py-5 rounded-2xl font-black uppercase text-xs tracking-widest">Play</button>
+                            <button onclick="pauseAudio()" class="btn-action flex-1 bg-slate-800 py-5 rounded-2xl font-black uppercase text-xs tracking-widest">Pause</button>
                         </div>
-                        <div class="space-y-4">
-                            <div class="flex justify-between text-[11px] font-black text-slate-500 uppercase tracking-widest px-1">
-                                <span>Volume Control</span>
-                                <span id="vol-txt" class="text-blue-500 font-black">100%</span>
+                        <div class="bg-slate-900/50 p-4 rounded-2xl border border-white/5">
+                            <div class="flex justify-between text-[10px] font-black text-slate-500 uppercase mb-3">
+                                <span>Output Volume</span>
+                                <span id="vol-txt" class="text-blue-500">100%</span>
                             </div>
-                            <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-4 h-full">
-                <div class="glass p-6 rounded-[3.5rem] h-[650px] lg:h-full flex flex-col border border-white/5 shadow-2xl">
-                    <div class="flex items-center justify-between mb-6 px-3">
-                        <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 italic">Chat Hub</h4>
-                        <span class="text-[9px] bg-blue-600/10 text-blue-400 px-3 py-1 rounded-full font-black border border-blue-500/20">ADMIN ACTIVE</span>
+            <div class="lg:col-span-4">
+                <div class="glass-card h-[600px] lg:h-full flex flex-col p-2 neon-border overflow-hidden">
+                    <div class="p-5 flex justify-between items-center border-b border-white/5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full shadow-[0_0_8px_#3b82f6]"></div>
+                            <h2 class="text-xs font-black uppercase tracking-widest text-slate-300">Live Chat Hub</h2>
+                        </div>
+                        <span class="text-[9px] bg-slate-800 px-2 py-1 rounded-md text-slate-400 font-bold uppercase">v2.0 Stable</span>
                     </div>
-                    
-                    <div class="flex-1 rounded-[2.5rem] overflow-hidden bg-slate-950/80 border border-white/5 shadow-inner">
+
+                    <div class="flex-1 m-2 rounded-[1.8rem] overflow-hidden bg-slate-950/20">
                         <iframe 
                             src="https://www5.cbox.ws/box/?boxid=960829&boxtag=ytn5a5" 
                             width="100%" 
@@ -68,13 +121,21 @@
                             frameborder="0" 
                             marginheight="0" 
                             marginwidth="0" 
-                            scrolling="auto">
+                            scrolling="auto"
+                            style="filter: contrast(1.1) brightness(0.95);">
                         </iframe>
                     </div>
-                    <p class="text-[9px] text-center text-slate-600 mt-6 font-bold uppercase tracking-widest italic tracking-widest">Global Transmission Verified</p>
+
+                    <div class="p-4 text-center">
+                        <p class="text-[8px] font-bold text-slate-600 uppercase tracking-[0.3em]">Transmission Secured by Viru FM</p>
+                    </div>
                 </div>
             </div>
         </main>
+
+        <footer class="text-center py-6">
+            <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">© 2026 Viru FM Digital Engine • All Rights Reserved</p>
+        </footer>
     </div>
 
     <script>
@@ -84,7 +145,10 @@
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '100%', width: '100%', videoId: VIDEO_ID,
-                playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1, 'rel': 0, 'showinfo': 0 },
+                playerVars: { 
+                    'autoplay': 1, 'controls': 0, 'modestbranding': 1, 
+                    'rel': 0, 'showinfo': 0, 'iv_load_policy': 3, 'mute': 0 
+                },
                 events: { 'onReady': (e) => e.target.playVideo() }
             });
         }
