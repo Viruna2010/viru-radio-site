@@ -17,7 +17,6 @@
             height: 100vh;
         }
 
-        /* 🌌 Animated Background Particles */
         #particles-js {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
@@ -31,7 +30,6 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
         }
 
-        /* ⚡ Neon Glow Animation */
         .neon-glow {
             animation: neon-pulse 3s infinite alternate;
         }
@@ -40,7 +38,6 @@
             100% { border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
         }
 
-        /* 👾 Glitch Text Effect */
         .glitch {
             position: relative;
             font-family: 'Orbitron', sans-serif;
@@ -71,7 +68,10 @@
         <header class="glass rounded-3xl p-5 flex flex-col md:flex-row justify-between items-center neon-glow">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 010-8.808M12 12m4.889 4.404a5.5 5.5 0 000-8.808M12 12V4M12 12l-4 4m4-4l4 4" />
+                        <circle cx="12" cy="12" r="2" stroke-width="2"/>
+                    </svg>
                 </div>
                 <div>
                     <h1 class="text-2xl font-black glitch tracking-tighter">VIRU FM <span class="text-white">PRO</span></h1>
@@ -84,9 +84,9 @@
                     <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Live Listeners</p>
                     <p id="listener-count" class="text-lg font-black text-blue-400 font-mono">0</p>
                 </div>
-                <div class="glass px-5 py-2 rounded-xl text-center">
+                <div class="glass px-5 py-2 rounded-xl text-center border-emerald-500/20">
                     <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Server Status</p>
-                    <p class="text-lg font-black text-emerald-400 uppercase">Secure</p>
+                    <p class="text-lg font-black text-emerald-400 uppercase tracking-tighter">Secure</p>
                 </div>
             </div>
         </header>
@@ -108,7 +108,7 @@
                     <div class="p-4 flex flex-col md:flex-row gap-4 items-center bg-white/5">
                         <div class="flex gap-2 w-full md:w-auto">
                             <button onclick="playAudio()" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all shadow-lg shadow-blue-600/20">Play</button>
-                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all border border-white/5">Pause</button>
+                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">Pause</button>
                         </div>
                         <div class="flex-1 w-full space-y-1">
                             <div class="flex justify-between text-[8px] font-black text-slate-500 uppercase">
@@ -140,15 +140,14 @@
         </main>
 
         <footer class="text-center py-2">
-            <p class="text-[8px] font-bold text-slate-600 uppercase tracking-[0.6em]">
-                © 2026 VIRU FM <span class="text-blue-500 font-black">DIGITAL ENGINE</span> • ALL RIGHTS RESERVED
+            <p class="text-[9px] font-bold uppercase tracking-[0.5em] text-slate-500">
+                © 2026 <span class="text-blue-500 font-black shadow-blue-500/50">VIRU FM DIGITAL ENGINE</span> • ALL RIGHTS RESERVED
             </p>
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // 🌌 Particle Background Config
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
@@ -162,7 +161,6 @@
             "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } }
         });
 
-        // 📺 YouTube Player Engine
         var player;
         const VIDEO_ID = 'VgcjkB8wg8g';
         function onYouTubeIframeAPIReady() {
