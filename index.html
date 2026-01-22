@@ -23,8 +23,7 @@
     <div id="particles-js"></div>
 
     <div class="max-w-7xl mx-auto w-full h-full flex flex-col space-y-3">
-        
-        <header class="glass p-4 flex flex-col md:flex-row justify-between items-center shadow-xl">
+        <header class="glass p-4 flex flex-col md:flex-row justify-between items-center shadow-xl border-b border-blue-500/10">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
                     <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -34,13 +33,13 @@
                 </div>
                 <div>
                     <h1 class="text-2xl font-black glitch-pro tracking-tighter">Viru FM <span class="text-blue-500 text-lg">PRO</span></h1>
-                    <p class="text-[8px] font-bold text-blue-400 tracking-[0.4em] uppercase">Digital Engine v5.0 Stable</p>
+                    <p class="text-[8px] font-bold text-blue-400 tracking-[0.4em] uppercase">Titanium Engine v25 Stable</p>
                 </div>
             </div>
             <div class="flex gap-3 mt-3 md:mt-0">
                 <div class="glass px-5 py-2 text-center min-w-[120px]">
                     <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Live Listeners</p>
-                    <p id="listener-count" class="text-lg font-black text-blue-400 font-mono">0</p>
+                    <p id="listener-count" class="text-lg font-black text-blue-400 font-mono">5,200</p>
                 </div>
                 <div class="glass px-5 py-2 text-center">
                     <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Server Status</p>
@@ -50,25 +49,22 @@
         </header>
 
         <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 overflow-hidden">
-            
             <div class="lg:col-span-8 flex flex-col space-y-3 overflow-hidden">
                 <div class="glass p-2 flex-1 flex flex-col relative overflow-hidden">
                     <div class="relative flex-1 rounded-[1.2rem] overflow-hidden bg-black ring-1 ring-white/10 shadow-2xl">
                         <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                         <div class="absolute bottom-6 right-6 flex items-center gap-2 bg-black/40 backdrop-blur-md border border-red-600/40 px-3 py-1.5 rounded-full live-pulse">
-                            <span class="w-2.5 h-2.5 bg-red-600 rounded-full shadow-[0_0_8px_#dc2626]"></span>
+                            <span class="w-2.5 h-2.5 bg-red-600 rounded-full"></span>
                             <span class="text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">Live On-Air</span>
                         </div>
                     </div>
-                    
                     <div class="p-4 flex flex-col md:flex-row gap-4 items-center bg-white/5">
                         <div class="flex gap-2 w-full md:w-auto">
-                            <button onclick="playAudio()" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all shadow-lg shadow-blue-600/20">Play</button>
-                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">Pause</button>
+                            <button onclick="playAudio()" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-black uppercase text-[10px] tracking-widest transition shadow-lg">Play</button>
+                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-black uppercase text-[10px] tracking-widest transition">Pause</button>
                         </div>
                         <div class="flex-1 w-full space-y-1">
-                            <div class="flex justify-between text-[8px] font-black text-slate-500 uppercase">
+                            <div class="flex justify-between text-[8px] font-black text-slate-500 uppercase tracking-widest">
                                 <span>Output Control</span>
                                 <span id="vol-txt" class="text-blue-400">100%</span>
                             </div>
@@ -79,48 +75,68 @@
             </div>
 
             <div class="lg:col-span-4 flex flex-col space-y-3 overflow-hidden">
-                
                 <div class="glass p-4 border-l-4 border-l-blue-600 shadow-2xl">
-                    <div class="flex justify-between items-center mb-3">
-                        <div>
-                            <h3 class="text-blue-500 font-black text-[7px] uppercase tracking-widest mb-0.5">System Operator</h3>
-                            <p class="text-md font-black text-white italic tracking-tighter uppercase">VIRUNA RANDINU</p>
-                        </div>
-                        <span class="text-[8px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30 font-black">ACTIVE</span>
-                    </div>
+                    <h3 class="text-blue-500 font-black text-[7px] uppercase tracking-widest mb-0.5">System Operator</h3>
+                    <p class="text-md font-black text-white italic tracking-tighter mb-3 uppercase tracking-tighter">VIRUNA RANDINU</p>
                     <div class="grid grid-cols-2 gap-2">
-                        <a href="https://wa.me/94786888371" target="_blank" class="flex items-center justify-center gap-2 py-2 rounded-lg bg-white/5 border border-white/5 transition-all btn-link text-[9px] font-black uppercase tracking-widest">WhatsApp</a>
-                        <a href="mailto:viruna.randinu1@gmail.com" class="flex items-center justify-center gap-2 py-2 rounded-lg bg-white/5 border border-white/5 transition-all btn-link text-[9px] font-black uppercase tracking-widest">Gmail</a>
+                        <a href="https://wa.me/94786888371" target="_blank" class="flex items-center justify-center gap-2 py-2 rounded-lg bg-white/5 border border-white/5 text-[9px] font-black uppercase tracking-widest transition hover:bg-blue-600/20">WhatsApp</a>
+                        <a href="mailto:viruna.randinu1@gmail.com" class="flex items-center justify-center gap-2 py-2 rounded-lg bg-white/5 border border-white/5 text-[9px] font-black uppercase tracking-widest transition hover:bg-blue-600/20">Email</a>
                     </div>
                 </div>
-
-                <div class="glass flex-1 flex flex-col overflow-hidden shadow-xl border-t-2 border-t-blue-500/20">
+                <div class="glass flex-1 flex flex-col overflow-hidden shadow-xl">
                     <div class="p-3 border-b border-white/5 flex items-center justify-between bg-white/5">
                         <span class="text-[8px] font-black uppercase tracking-widest text-blue-400">Communication Center</span>
                         <div class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping"></div>
                     </div>
                     <div class="flex-1 p-1">
-                        <iframe src="https://www5.cbox.ws/box/?boxid=960829&boxtag=ytn5a5" width="100%" height="100%" allowtransparency="yes" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style="filter: contrast(1.1) brightness(0.95); border-radius: 0.8rem;"></iframe>
+                        <iframe src="https://www5.cbox.ws/box/?boxid=960829&boxtag=ytn5a5" width="100%" height="100%" frameborder="0" style="border-radius: 0.8rem;"></iframe>
                     </div>
                 </div>
             </div>
         </main>
 
-        <footer class="text-center py-2">
-            <p class="text-[8px] font-black uppercase tracking-[0.6em] text-blue-500/80">
-                © 2026 VIRU FM DIGITAL ENGINE • ALL RIGHTS RESERVED
-            </p>
-        </footer>
+        <footer class="text-center py-2 text-[8px] font-black uppercase tracking-[0.6em] text-slate-600">VIRU FM DIGITAL ENGINE • ALL RIGHTS RESERVED</footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS("particles-js", { "particles": { "number": { "value": 50, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#3b82f6" }, "shape": { "type": "circle" }, "opacity": { "value": 0.3 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 1.2 } } });
-        var player; function onYouTubeIframeAPIReady() { player = new YT.Player('player', { height: '100%', width: '100%', videoId: 'VgcjkB8wg8g', playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1 }, events: { 'onReady': (e) => e.target.playVideo() } }); }
-        function playAudio() { player.playVideo(); }
+        // --- පරණ Matrix Lines Particles ලුක් එක මෙන්න ---
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#3b82f6" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } } }
+            },
+            "retina_detect": true
+        });
+
+        var player; 
+        function onYouTubeIframeAPIReady() { 
+            player = new YT.Player('player', { 
+                height: '100%', width: '100%', 
+                videoId: 'opd7CAQmtzM', // අලුත්ම ID එක
+                playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1, 'mute': 1 }, 
+                events: { 'onReady': (e) => e.target.playVideo() } 
+            }); 
+        }
+        function playAudio() { player.playVideo(); player.unMute(); }
         function pauseAudio() { player.pauseVideo(); }
-        document.getElementById('volume-slider').addEventListener('input', (e) => { player.setVolume(e.target.value); document.getElementById('vol-txt').innerText = e.target.value + '%'; });
-        setInterval(() => { let c = Math.floor(Math.random() * 550) + 700; document.getElementById('listener-count').innerText = c.toLocaleString(); }, 5000);
+        document.getElementById('volume-slider').addEventListener('input', (e) => { 
+            player.setVolume(e.target.value); 
+            document.getElementById('vol-txt').innerText = e.target.value + '%'; 
+        });
+        setInterval(() => { 
+            let c = Math.floor(Math.random() * 200) + 5200; 
+            document.getElementById('listener-count').innerText = c.toLocaleString(); 
+        }, 5000);
     </script>
 </body>
 </html>
