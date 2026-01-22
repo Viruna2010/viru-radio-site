@@ -1,4 +1,4 @@
-Const express = require('express');
+const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
@@ -9,7 +9,7 @@ const port = process.env.PORT || 10000;
 
 // Render/Vercel Environment Variables වලින් දත්ත ගන්නවා
 const STREAM_KEY = process.env.STREAM_KEY;
-const VIDEO_ID = process.env.YOUTUBE_VIDEO_ID || 'VgcjkB8wg8g'; 
+const VIDEO_ID = process.env.YOUTUBE_VIDEO_ID || 'opd7CAQmtzM'; 
 
 app.get('/', (req, res) => {
     res.send(`
