@@ -6,19 +6,23 @@
     <title>VIRU FM | VIRUNA RANDINU</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon-blue: #3b82f6; --dark-bg: #020617; }
         body { background-color: var(--dark-bg); color: white; font-family: 'Inter', sans-serif; overflow: hidden; height: 100vh; }
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 1.5rem; }
-        .glitch-pro { font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; animation: glow 2s ease-in-out infinite alternate; }
-        @keyframes glow { from { text-shadow: 0 0 5px #fff, 0 0 10px #3b82f6; } to { text-shadow: 0 0 10px #fff, 0 0 20px #3b82f6; } }
         
-        /* 🔴 Play Now Overlay CSS */
-        #play-overlay { position: absolute; inset: 0; z-index: 50; background: rgba(0,0,0,0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.5s; border-radius: 1.2rem; }
-        .play-circle { width: 80px; height: 80px; background: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); animation: pulse-blue 2s infinite; }
-        @keyframes pulse-blue { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+        /* ✨ Fixed Name: No Glow, Strong Blue */
+        .header-title { 
+            font-family: 'Orbitron', sans-serif; 
+            color: #3b82f6; 
+            letter-spacing: 0.05em; 
+            text-transform: uppercase;
+        }
+
+        #play-overlay { position: absolute; inset: 0; z-index: 50; background: rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.5s; border-radius: 1.2rem; }
+        .play-circle { width: 80px; height: 80px; background: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
     </style>
 </head>
 <body class="flex flex-col h-screen p-2 md:p-4 overflow-hidden">
@@ -33,7 +37,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-black glitch-pro tracking-tighter text-blue-500">Viru FM</h1>
+                    <h1 class="text-3xl font-bold header-title">Viru FM</h1>
                     <p class="text-[8px] font-bold text-blue-400 tracking-[0.4em] uppercase">Digital Music Engine Stable</p>
                 </div>
             </div>
@@ -54,7 +58,7 @@
                             <div class="play-circle">
                                 <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             </div>
-                            <p class="mt-4 font-black uppercase tracking-[0.3em] text-blue-500 animate-pulse">Click to Listen Live</p>
+                            <p class="mt-4 font-bold uppercase tracking-[0.3em] text-blue-500">Click to Listen Live</p>
                         </div>
 
                         <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
@@ -62,8 +66,8 @@
                     
                     <div class="p-4 flex flex-col md:flex-row gap-4 items-center bg-white/5">
                         <div class="flex gap-2 w-full md:w-auto">
-                            <button onclick="playAudio()" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">Play</button>
-                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">Pause</button>
+                            <button onclick="playAudio()" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all">Play</button>
+                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all">Pause</button>
                         </div>
                         <div class="flex-1 w-full">
                             <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
@@ -87,7 +91,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS("particles-js", { "particles": { "number": { "value": 40 }, "color": { "value": "#3b82f6" }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.1 }, "move": { "enable": true, "speed": 1 } } });
+        particlesJS("particles-js", { "particles": { "number": { "value": 30 }, "color": { "value": "#3b82f6" }, "opacity": { "value": 0.2 }, "move": { "speed": 1 } } });
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -104,6 +108,10 @@
         function playAudio() { player.playVideo(); }
         function pauseAudio() { player.pauseVideo(); }
         document.getElementById('volume-slider').addEventListener('input', (e) => player.setVolume(e.target.value));
+        setInterval(() => {
+            let c = Math.floor(Math.random() * 50) + 1450;
+            document.getElementById('listener-count').innerText = c.toLocaleString();
+        }, 5000);
     </script>
 </body>
 </html>
