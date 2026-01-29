@@ -115,7 +115,16 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", { "particles": { "number": { "value": 50, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#3b82f6" }, "shape": { "type": "circle" }, "opacity": { "value": 0.3 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 1.2 } } });
-        var player; function onYouTubeIframeAPIReady() { player = new YT.Player('player', { height: '100%', width: '100%', videoId: 'VgcjkB8wg8g', playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1 }, events: { 'onReady': (e) => e.target.playVideo() } }); }
+        var player; 
+        function onYouTubeIframeAPIReady() { 
+            player = new YT.Player('player', { 
+                height: '100%', 
+                width: '100%', 
+                videoId: 'opd7CAQmtzM', 
+                playerVars: { 'autoplay': 1, 'controls': 0, 'modestbranding': 1 }, 
+                events: { 'onReady': (e) => e.target.playVideo() } 
+            }); 
+        }
         function playAudio() { player.playVideo(); }
         function pauseAudio() { player.pauseVideo(); }
         document.getElementById('volume-slider').addEventListener('input', (e) => { player.setVolume(e.target.value); document.getElementById('vol-txt').innerText = e.target.value + '%'; });
