@@ -7,32 +7,46 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon-blue: #3b82f6; --dark-bg: #020617; }
         
-        /* 🌑 Back to Original Dark Background */
-        body { background-color: var(--dark-bg); color: white; font-family: 'Inter', sans-serif; overflow: hidden; height: 100vh; }
+        /* ✅ Back to Original Animated Gradient Background */
+        body { 
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e293b, #020617);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         
         .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 1.5rem; }
         
-        /* ✨ Neon Glow Name */
-        .glitch-pro { 
+        .header-title { 
             font-family: 'Orbitron', sans-serif; 
-            letter-spacing: 0.1em; 
-            text-transform: uppercase; 
-            color: #3b82f6;
-            animation: glow 2s ease-in-out infinite alternate; 
+            color: #3b82f6; 
+            letter-spacing: 0.05em; 
+            text-transform: uppercase;
         }
-        @keyframes glow { from { text-shadow: 0 0 5px #fff, 0 0 10px #3b82f6; } to { text-shadow: 0 0 10px #fff, 0 0 20px #3b82f6; } }
 
-        #play-overlay { position: absolute; inset: 0; z-index: 50; background: rgba(0,0,0,0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.5s; border-radius: 1.2rem; }
-        .play-circle { width: 80px; height: 80px; background: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
+        #play-overlay { position: absolute; inset: 0; z-index: 50; background: rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.5s; border-radius: 1.2rem; }
+        .play-circle { width: 80px; height: 80px; background: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
         .live-pulse { animation: breathe 2s ease-in-out infinite; }
         @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
-<body class="flex flex-col h-screen p-2 md:p-4">
+<body class="p-2 md:p-4">
 
     <div class="max-w-7xl mx-auto w-full h-full flex flex-col space-y-3">
         <header class="glass p-4 flex flex-col md:flex-row justify-between items-center shadow-xl">
@@ -41,7 +55,7 @@
                     <i class="fa-solid fa-music text-2xl text-white"></i>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-black glitch-pro tracking-tighter">Viru FM</h1>
+                    <h1 class="text-3xl font-bold header-title">Viru FM</h1>
                     <p class="text-[8px] font-bold text-blue-400 tracking-[0.4em] uppercase">Digital Music Engine Stable</p>
                 </div>
             </div>
@@ -62,7 +76,7 @@
                             <div class="play-circle">
                                 <i class="fa-solid fa-play text-3xl text-white ml-1"></i>
                             </div>
-                            <p class="mt-4 font-black uppercase tracking-[0.3em] text-blue-500 animate-pulse">Click to Listen Live</p>
+                            <p class="mt-4 font-bold uppercase tracking-[0.3em] text-blue-500">Click to Listen Live</p>
                         </div>
 
                         <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
@@ -74,8 +88,8 @@
                     
                     <div class="p-4 flex flex-col md:flex-row gap-4 items-center bg-white/5">
                         <div class="flex gap-2 w-full md:w-auto">
-                            <button onclick="playAudio()" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">Play</button>
-                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all">Pause</button>
+                            <button onclick="playAudio()" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all">Play</button>
+                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all">Pause</button>
                         </div>
                         <div class="flex-1 w-full">
                             <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
@@ -95,12 +109,6 @@
                 </div>
             </div>
         </main>
-
-        <footer class="text-center py-2">
-            <p class="text-[8px] font-black uppercase tracking-[0.6em] text-blue-500/80">
-                © 2026 VIRU FM DIGITAL ENGINE • ALL RIGHTS RESERVED
-            </p>
-        </footer>
     </div>
 
     <script>
