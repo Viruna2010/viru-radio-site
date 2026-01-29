@@ -10,11 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon-blue: #3b82f6; --dark-bg: #020617; }
+        
+        /* 🌑 Back to Original Dark Background */
         body { background-color: var(--dark-bg); color: white; font-family: 'Inter', sans-serif; overflow: hidden; height: 100vh; }
-        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        
         .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 1.5rem; }
         
-        /* ✨ Back to Glow: Viral Vibe */
+        /* ✨ Neon Glow Name */
         .glitch-pro { 
             font-family: 'Orbitron', sans-serif; 
             letter-spacing: 0.1em; 
@@ -26,10 +28,11 @@
 
         #play-overlay { position: absolute; inset: 0; z-index: 50; background: rgba(0,0,0,0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.5s; border-radius: 1.2rem; }
         .play-circle { width: 80px; height: 80px; background: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
+        .live-pulse { animation: breathe 2s ease-in-out infinite; }
+        @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
-<body class="flex flex-col h-screen p-2 md:p-4 overflow-hidden">
-    <div id="particles-js"></div>
+<body class="flex flex-col h-screen p-2 md:p-4">
 
     <div class="max-w-7xl mx-auto w-full h-full flex flex-col space-y-3">
         <header class="glass p-4 flex flex-col md:flex-row justify-between items-center shadow-xl">
@@ -63,6 +66,10 @@
                         </div>
 
                         <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
+                        <div class="absolute bottom-6 right-6 flex items-center gap-2 bg-black/40 backdrop-blur-md border border-red-600/40 px-3 py-1.5 rounded-full live-pulse">
+                            <span class="w-2.5 h-2.5 bg-red-600 rounded-full shadow-[0_0_8px_#dc2626]"></span>
+                            <span class="text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">Live On-Air</span>
+                        </div>
                     </div>
                     
                     <div class="p-4 flex flex-col md:flex-row gap-4 items-center bg-white/5">
@@ -88,11 +95,15 @@
                 </div>
             </div>
         </main>
+
+        <footer class="text-center py-2">
+            <p class="text-[8px] font-black uppercase tracking-[0.6em] text-blue-500/80">
+                © 2026 VIRU FM DIGITAL ENGINE • ALL RIGHTS RESERVED
+            </p>
+        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS("particles-js", { "particles": { "number": { "value": 40 }, "color": { "value": "#3b82f6" }, "opacity": { "value": 0.2 }, "move": { "speed": 1 } } });
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -109,6 +120,7 @@
         function playAudio() { player.playVideo(); }
         function pauseAudio() { player.pauseVideo(); }
         document.getElementById('volume-slider').addEventListener('input', (e) => player.setVolume(e.target.value));
+        
         setInterval(() => {
             let c = Math.floor(Math.random() * 50) + 1450;
             document.getElementById('listener-count').innerText = c.toLocaleString();
