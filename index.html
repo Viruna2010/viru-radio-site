@@ -13,29 +13,46 @@
     <style>
         :root { --neon-blue: #00d2ff; --dark-bg: #020617; }
         body { background-color: var(--dark-bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* අර පරණ ලස්සන තරු වැටෙන ඇනිමේෂන් එක */
+        #bg-stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #0f172a 0%, #020617 100%); }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: fall linear infinite; }
+        @keyframes fall {
+            from { transform: translateY(-10vh); }
+            to { transform: translateY(110vh); }
+        }
+
         .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 1.5rem; }
         .header-title { font-family: 'Orbitron', sans-serif; color: #00d2ff; letter-spacing: 0.05em; text-transform: uppercase; }
+        
         #chat-messages { flex: 1; overflow-y: auto; padding: 10px; scrollbar-width: thin; scrollbar-color: #00d2ff transparent; }
         .msg { margin-bottom: 8px; padding: 8px 12px; border-radius: 12px; font-size: 13px; max-width: 85%; word-wrap: break-word; }
         .msg-user { background: rgba(0, 210, 255, 0.1); border-left: 3px solid #00d2ff; align-self: flex-start; }
         .msg-me { background: rgba(255, 255, 255, 0.1); border-right: 3px solid #ffffff; align-self: flex-end; text-align: right; }
-        .admin-badge { background: #ff0055; color: #fff; font-size: 8px; font-weight: 900; padding: 1px 4px; border-radius: 4px; margin-left: 5px; text-transform: uppercase; vertical-align: middle; }
+        
+        /* Admin Badge */
+        .admin-badge { background: #10b981; color: white; font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; margin-left: 6px; text-transform: uppercase; vertical-align: middle; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+
+        /* Professional Volume Control */
+        #volume-slider { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; outline: none; }
+        #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: #00d2ff; cursor: pointer; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 15px #00d2ff; }
+
         #play-overlay { position: absolute; inset: 0; z-index: 50; background: rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-radius: 1.2rem; }
         .play-circle { width: 80px; height: 80px; background: var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(0, 210, 255, 0.4); }
-        .live-pulse { animation: breathe 2s ease-in-out infinite; }
-        @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
 <body class="flex flex-col min-h-screen lg:h-screen p-2 md:p-4">
+    <div id="bg-stars"></div>
+    
     <div class="max-w-7xl mx-auto w-full h-full flex flex-col space-y-3">
-        <header class="glass p-4 flex flex-col md:flex-row justify-between items-center shadow-xl flex-shrink-0">
+        <header class="glass p-4 flex flex-col md:flex-row justify-between items-center flex-shrink-0">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-cyan-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-music text-2xl text-white"></i></div>
-                <div><h1 class="text-3xl font-bold header-title">Viru FM</h1><p class="text-[8px] font-bold text-cyan-400 tracking-[0.4em] uppercase">Digital Music Engine</p></div>
+                <div><h1 class="text-3xl font-bold header-title">Viru FM</h1><p class="text-[8px] font-bold text-cyan-400 tracking-[0.4em] uppercase">Engine Stable v2.0</p></div>
             </div>
             <div class="flex gap-3 mt-3 md:mt-0">
-                <div class="glass px-5 py-2 text-center"><p class="text-[7px] text-slate-500 font-black uppercase">Listeners</p><p id="listener-count" class="text-lg font-black text-cyan-400">1,452</p></div>
-                <div class="glass px-5 py-2 text-center"><p class="text-[7px] text-slate-500 font-black uppercase">Status</p><p class="text-lg font-black text-emerald-400 uppercase">Secure</p></div>
+                <div class="glass px-5 py-2 text-center min-w-[120px]"><p class="text-[7px] text-slate-500 font-black uppercase">Live Listeners</p><p id="listener-count" class="text-lg font-black text-cyan-400 font-mono">1,452</p></div>
+                <div class="glass px-5 py-2 text-center"><p class="text-[7px] text-slate-500 font-black uppercase">Server</p><p class="text-lg font-black text-emerald-400">ONLINE</p></div>
             </div>
         </header>
 
@@ -44,31 +61,36 @@
                 <div class="glass p-2 flex-1 flex flex-col relative overflow-hidden min-h-[300px] lg:min-h-0">
                     <div id="play-overlay" onclick="startRadio()">
                         <div class="play-circle"><i class="fa-solid fa-play text-3xl text-white ml-1"></i></div>
-                        <p class="mt-4 font-bold tracking-[0.3em] text-cyan-500 animate-pulse uppercase text-xs">Click to Listen Live</p>
+                        <p class="mt-4 font-bold uppercase tracking-[0.3em] text-cyan-500 animate-pulse">Click to Listen Live</p>
                     </div>
                     <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
-                    <div class="absolute bottom-6 right-6 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full live-pulse">
-                        <span class="w-2.5 h-2.5 bg-red-600 rounded-full"></span>
-                        <span class="text-red-500 text-[10px] font-black uppercase">Live On-Air</span>
-                    </div>
                 </div>
+                
                 <div class="glass p-4 flex flex-col md:flex-row gap-6 items-center">
-                    <button onclick="playAudio()" class="px-8 py-3 bg-cyan-600 rounded-xl font-bold uppercase text-[10px] flex-1 shadow-lg shadow-cyan-500/20">Play</button>
-                    <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 rounded-xl font-bold uppercase text-[10px] flex-1">Pause</button>
-                    <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-full md:w-48 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                    <div class="flex gap-2 w-full md:w-auto">
+                        <button onclick="playAudio()" class="px-8 py-3 bg-cyan-600 rounded-xl font-bold uppercase text-[10px] flex-1">Play</button>
+                        <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 rounded-xl font-bold uppercase text-[10px] flex-1">Pause</button>
+                    </div>
+                    <div class="flex-1 w-full flex items-center gap-4">
+                        <i class="fa-solid fa-volume-high text-cyan-500 text-xs"></i>
+                        <div class="flex-1 flex flex-col">
+                            <div class="flex justify-between mb-1"><span class="text-[7px] font-black uppercase text-cyan-400">Output Control</span><span id="vol-percent" class="text-[7px] font-mono text-cyan-400">100%</span></div>
+                            <input type="range" id="volume-slider" min="0" max="100" value="100">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-4 flex flex-col space-y-3 h-[500px] lg:h-auto">
+            <div class="lg:col-span-4 flex flex-col h-[500px] lg:h-auto">
                 <div class="glass flex-1 flex flex-col overflow-hidden">
                     <div class="p-3 border-b border-white/5 bg-white/5 flex justify-between items-center">
                         <span class="text-[8px] font-black uppercase text-cyan-400">Viru Live Chat</span>
-                        <button onclick="changeName()" class="text-[7px] text-slate-400 underline uppercase">Settings</button>
+                        <button onclick="resetUser()" class="text-[7px] text-slate-400 underline">Change Name</button>
                     </div>
                     <div id="chat-messages" class="flex flex-col"></div>
                     <form onsubmit="sendMessage(event)" class="p-3 bg-white/5 border-t border-white/5 flex gap-2">
-                        <input type="text" id="chat-input" placeholder="Type a message..." class="flex-1 bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs focus:border-cyan-500 outline-none text-white">
-                        <button type="submit" class="bg-cyan-600 px-4 py-2 rounded-lg text-xs font-bold"><i class="fa-solid fa-paper-plane"></i></button>
+                        <input type="text" id="chat-input" placeholder="Type a message..." class="flex-1 bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:border-cyan-500 outline-none">
+                        <button type="submit" class="bg-cyan-600 px-4 py-2 rounded-lg"><i class="fa-solid fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
@@ -76,7 +98,19 @@
     </div>
 
     <script>
-        // Firebase Config
+        // තරු වැටෙන ඇනිමේෂන් එක හදන හැටි
+        const starContainer = document.getElementById('bg-stars');
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 'px';
+            star.style.width = size; star.style.height = size;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starContainer.appendChild(star);
+        }
+
         const firebaseConfig = { databaseURL: "https://viru-radio-chat-default-rtdb.firebaseio.com/" };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
@@ -84,37 +118,29 @@
         let userName = localStorage.getItem("viru_chat_name");
         let isAdmin = localStorage.getItem("viru_is_admin") === "true";
 
-        if (!userName) {
-            setupUser();
-        }
+        if (!userName) { setupUser(); }
 
         function setupUser() {
             let name = prompt("Enter your name:");
             if (name === "Viruna Randinu") {
                 let pass = prompt("Enter Admin Password:");
-                if (pass === "viru123") {
+                if (pass === "Viruna12") {
                     isAdmin = true;
                     localStorage.setItem("viru_is_admin", "true");
                 } else {
-                    alert("Wrong password! Login as guest.");
+                    alert("Wrong Password!");
                     name = "Guest_" + Math.floor(Math.random() * 999);
                     isAdmin = false;
-                    localStorage.setItem("viru_is_admin", "false");
                 }
             } else {
-                isAdmin = false;
-                localStorage.setItem("viru_is_admin", "false");
                 if (!name) name = "Guest_" + Math.floor(Math.random() * 999);
+                isAdmin = false;
             }
             userName = name;
             localStorage.setItem("viru_chat_name", userName);
         }
 
-        function changeName() {
-            localStorage.removeItem("viru_chat_name");
-            localStorage.removeItem("viru_is_admin");
-            location.reload();
-        }
+        function resetUser() { localStorage.clear(); location.reload(); }
 
         var player; 
         function onYouTubeIframeAPIReady() { 
@@ -123,36 +149,32 @@
         function startRadio() { document.getElementById('play-overlay').style.display = 'none'; player.unMute(); player.playVideo(); }
         function playAudio() { player.playVideo(); }
         function pauseAudio() { player.pauseVideo(); }
-        document.getElementById('volume-slider').addEventListener('input', (e) => player.setVolume(e.target.value));
+        
+        const slider = document.getElementById('volume-slider');
+        slider.addEventListener('input', (e) => { 
+            player.setVolume(e.target.value); 
+            document.getElementById('vol-percent').innerText = e.target.value + '%';
+        });
 
         function sendMessage(e) {
             e.preventDefault();
             const input = document.getElementById('chat-input');
             if(input.value.trim() !== "") {
-                db.ref("messages").push().set({ 
-                    name: userName, 
-                    message: input.value, 
-                    time: Date.now(),
-                    is_admin: isAdmin // මැසේජ් එක යවද්දීම ඇඩ්මින්ද කියලා බලනවා
-                });
+                db.ref("messages").push().set({ name: userName, message: input.value, time: Date.now(), is_admin: isAdmin });
                 input.value = "";
             }
         }
 
-        db.ref("messages").limitToLast(25).on("child_added", (snapshot) => {
-            const data = snapshot.val();
+        db.ref("messages").limitToLast(25).on("child_added", (snap) => {
+            const data = snap.val();
             const chatBox = document.getElementById('chat-messages');
             const isMe = (data.name === userName);
-
             const msgDiv = document.createElement('div');
             msgDiv.className = `msg ${isMe ? 'msg-me' : 'msg-user'}`;
             msgDiv.innerHTML = `<b class="text-[10px] text-cyan-400">${data.name}${data.is_admin ? '<span class="admin-badge">ADMIN</span>' : ''}</b><br>${data.message}`;
-            
             chatBox.appendChild(msgDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
         });
-
-        setInterval(() => { document.getElementById('listener-count').innerText = (Math.floor(Math.random() * 50) + 1400).toLocaleString(); }, 5000);
     </script>
 </body>
 </html>
