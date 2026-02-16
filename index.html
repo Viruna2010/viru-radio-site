@@ -22,18 +22,16 @@
             text-transform: uppercase;
         }
         
-        /* PC Scroll Fix: Chat එක ඇතුළේ Scrollbar එක හරියට පේන්න සහ වැඩ කරන්න */
+        /* Fixed Chat Scroll for PC */
         #chat-messages { 
             flex: 1; 
             overflow-y: auto !important; 
             padding: 10px; 
             scrollbar-width: thin; 
-            scrollbar-color: #00d2ff transparent; 
+            scrollbar-color: #00d2ff transparent;
             display: flex;
             flex-direction: column;
-            min-height: 200px;
         }
-
         #chat-messages::-webkit-scrollbar { width: 4px; }
         #chat-messages::-webkit-scrollbar-thumb { background: #00d2ff; border-radius: 10px; }
 
@@ -100,7 +98,7 @@
         .side-ad-right { right: 15px; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen p-2 md:p-4">
+<body class="flex flex-col min-h-screen lg:h-screen p-2 md:p-4 overflow-y-auto lg:overflow-hidden">
     <div id="particles-js"></div>
 
     <div class="side-ad side-ad-left glass p-1">
@@ -112,7 +110,7 @@
         <div id="container-c7e50ada1d96860b5b0935a6466fa02f_right"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto w-full flex flex-col space-y-3">
+    <div class="max-w-7xl mx-auto w-full h-full flex flex-col space-y-3">
         <header class="glass p-4 flex flex-col md:flex-row justify-between items-center shadow-xl flex-shrink-0">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-cyan-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/30">
@@ -135,10 +133,10 @@
             </div>
         </header>
 
-        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 h-full">
+        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 lg:overflow-hidden">
             <div class="lg:col-span-8 flex flex-col space-y-3">
-                <div class="glass p-2 flex-1 flex flex-col relative overflow-hidden min-h-[350px]">
-                    <div class="relative flex-1 rounded-[1.2rem] overflow-hidden bg-black ring-1 ring-white/10 shadow-2xl min-h-[250px]">
+                <div class="glass p-2 flex-1 flex flex-col relative overflow-hidden min-h-[300px] lg:min-h-0">
+                    <div class="relative flex-1 rounded-[1.2rem] overflow-hidden bg-black ring-1 ring-white/10 shadow-2xl h-[250px] lg:h-auto">
                         <div id="play-overlay" onclick="startRadio()">
                             <div class="play-circle"><i class="fa-solid fa-play text-3xl text-white ml-1"></i></div>
                             <p class="mt-4 font-bold uppercase tracking-[0.3em] text-cyan-500 animate-pulse">Click to Listen Live</p>
@@ -150,7 +148,7 @@
                         </div>
                     </div>
                     
-                    <div class="p-4 flex flex-col md:flex-row gap-6 items-center bg-white/5 mt-2 rounded-xl border border-white/5">
+                    <div class="p-4 flex flex-col md:flex-row gap-6 items-center bg-white/5 mt-2 rounded-xl border border-white/5 flex-shrink-0">
                         <div class="flex gap-2 w-full md:w-auto">
                             <button onclick="playAudio()" class="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all flex-1 shadow-lg shadow-cyan-500/20">Play</button>
                             <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all flex-1">Pause</button>
