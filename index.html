@@ -21,15 +21,15 @@
             letter-spacing: 0.05em; 
             text-transform: uppercase;
         }
-
-        /* --- CHAT SCROLL FIX ONLY --- */
+        
+        /* CHAT ONLY SCROLL FIX */
         #chat-messages { 
-            height: 350px; /* චැට් එකේ උස මේකෙන් පාලනය වෙනවා */
+            height: 380px; 
             overflow-y: auto !important; 
             padding: 10px; 
             display: flex;
             flex-direction: column;
-            scrollbar-width: thin;
+            scrollbar-width: thin; 
             scrollbar-color: #00d2ff transparent;
         }
         #chat-messages::-webkit-scrollbar { width: 5px; }
@@ -122,7 +122,7 @@
                 </div>
             </div>
             <div class="flex gap-3 mt-3 md:mt-0">
-                <div class="glass px-5 py-2 text-center">
+                <div class="glass px-5 py-2 text-center min-w-[120px]">
                     <p class="text-[7px] text-slate-500 font-black uppercase tracking-widest">Live Listeners</p>
                     <p id="listener-count" class="text-lg font-black text-cyan-400 font-mono">1,452</p>
                 </div>
@@ -136,40 +136,54 @@
         <main class="grid grid-cols-1 lg:grid-cols-12 gap-3">
             <div class="lg:col-span-8">
                 <div class="glass p-2 relative overflow-hidden">
-                    <div class="relative rounded-[1.2rem] overflow-hidden bg-black aspect-video">
+                    <div class="relative rounded-[1.2rem] overflow-hidden bg-black aspect-video ring-1 ring-white/10 shadow-2xl">
                         <div id="play-overlay" onclick="startRadio()">
                             <div class="play-circle"><i class="fa-solid fa-play text-3xl text-white ml-1"></i></div>
                             <p class="mt-4 font-bold uppercase tracking-[0.3em] text-cyan-500 animate-pulse">Click to Listen Live</p>
                         </div>
                         <div id="player" class="absolute top-0 left-0 w-full h-full pointer-events-none scale-105"></div>
                     </div>
-                    <div class="p-4 flex flex-col md:flex-row gap-6 items-center bg-white/5 mt-2 rounded-xl">
+                    
+                    <div class="p-4 flex flex-col md:flex-row gap-6 items-center bg-white/5 mt-2 rounded-xl border border-white/5">
                         <div class="flex gap-2 w-full md:w-auto">
-                            <button onclick="playAudio()" class="px-8 py-3 bg-cyan-600 rounded-xl font-bold uppercase text-[10px] tracking-widest">Play</button>
-                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 rounded-xl font-bold uppercase text-[10px] tracking-widest">Pause</button>
+                            <button onclick="playAudio()" class="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all">Play</button>
+                            <button onclick="pauseAudio()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all">Pause</button>
                         </div>
-                        <div class="flex-1 w-full">
-                            <input type="range" id="volume-slider" class="w-full" min="0" max="100" value="100">
+                        <div class="flex-1 w-full flex items-center gap-4">
+                            <i class="fa-solid fa-volume-high text-cyan-500 text-xs"></i>
+                            <input type="range" id="volume-slider" min="0" max="100" value="100">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-4 flex flex-col h-full">
-                <div class="glass flex flex-col overflow-hidden h-full">
-                    <div class="p-3 border-b border-white/5 bg-white/5 flex justify-between">
+            <div class="lg:col-span-4 flex flex-col">
+                <div class="glass flex flex-col overflow-hidden h-full shadow-xl">
+                    <div class="p-3 border-b border-white/5 bg-white/5 flex justify-between items-center">
                         <span class="text-[8px] font-black uppercase tracking-widest text-cyan-400">Viru Live Chat</span>
+                        <button onclick="localStorage.clear(); location.reload();" class="text-[7px] text-slate-400 uppercase underline">Reset Name</button>
                     </div>
 
                     <div id="chat-messages"></div>
                     
                     <form onsubmit="handleSend(event)" class="p-3 bg-white/5 border-t border-white/5 flex gap-2">
-                        <input type="text" id="chat-input" placeholder="Type..." class="flex-1 bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs text-white outline-none">
-                        <button type="submit" class="bg-cyan-600 px-3 py-2 rounded-lg"><i class="fa-solid fa-paper-plane"></i></button>
+                        <input type="text" id="chat-input" placeholder="Type a message..." class="flex-1 bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-cyan-500">
+                        <button type="submit" class="bg-cyan-600 px-3 py-2 rounded-lg text-xs hover:bg-cyan-500">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
                     </form>
+
+                    <div class="lg:hidden p-2 border-t border-white/5 bg-black/20 flex justify-center">
+                        <script async="async" data-cfasync="false" src="https://pl28724967.effectivegatecpm.com/c7e50ada1d96860b5b0935a6466fa02f/invoke.js"></script>
+                        <div id="container-c7e50ada1d96860b5b0935a6466fa02f_mobile"></div>
+                    </div>
                 </div>
             </div>
         </main>
+        
+        <footer class="text-center py-4">
+            <p class="text-[8px] font-black uppercase tracking-[0.6em] text-cyan-500/80">© 2026 VIRU FM • ALL RIGHTS RESERVED</p>
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -178,10 +192,28 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        let userName = localStorage.getItem("viru_chat_name") || "Guest_" + Math.floor(Math.random() * 999);
+        let userName = localStorage.getItem("viru_chat_name");
         let isAdmin = localStorage.getItem("viru_is_admin") === "true";
 
-        particlesJS("particles-js", { "particles": { "number": { "value": 40 }, "color": { "value": "#00d2ff" }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "color": "#00d2ff", "opacity": 0.1 }, "move": { "enable": true, "speed": 1 } } });
+        if (!userName) {
+            let nameInput = prompt("Welcome! Enter your name for the chat:");
+            if (nameInput === "Viruna Randinu") {
+                let pass = prompt("Enter Admin Password:");
+                if (pass === "Viruna12") {
+                    isAdmin = true;
+                    localStorage.setItem("viru_is_admin", "true");
+                    userName = nameInput;
+                } else {
+                    alert("Incorrect Password!");
+                    userName = "Guest_" + Math.floor(Math.random() * 999);
+                }
+            } else {
+                userName = nameInput || "Guest_" + Math.floor(Math.random() * 999);
+            }
+            localStorage.setItem("viru_chat_name", userName);
+        }
+
+        particlesJS("particles-js", { "particles": { "number": { "value": 50 }, "color": { "value": "#00d2ff" }, "opacity": { "value": 0.3 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "color": "#00d2ff", "opacity": 0.1, "width": 1 }, "move": { "enable": true, "speed": 1.2 } } });
         
         var player; 
         function onYouTubeIframeAPIReady() { 
@@ -201,17 +233,33 @@
             e.preventDefault(); 
             const input = document.getElementById('chat-input');
             if(input.value.trim()) {
-                db.ref("messages").push().set({ name: userName, message: input.value, is_admin: isAdmin });
+                db.ref("messages").push().set({ name: userName, message: input.value, time: Date.now(), is_admin: isAdmin });
                 input.value = "";
             }
         }
 
-        db.ref("messages").limitToLast(15).on("child_added", (snap) => {
+        db.ref("messages").limitToLast(20).on("child_added", (snap) => {
             const data = snap.val();
             const chatBox = document.getElementById('chat-messages');
-            chatBox.innerHTML += `<div class="msg ${data.is_admin ? 'msg-admin' : 'msg-user'}"><b>${data.name}</b><p>${data.message}</p></div>`;
+            chatBox.innerHTML += `<div class="msg ${data.is_admin ? 'msg-admin' : 'msg-user'}">
+                <b class="flex items-center">${data.name}${data.is_admin ? '<span class="admin-badge">ADMIN</span>' : ''}</b>
+                <p>${data.message}</p>
+            </div>`;
             chatBox.scrollTop = chatBox.scrollHeight;
         });
+
+        setInterval(() => {
+            let c = Math.floor(Math.random() * 100) + 1400;
+            document.getElementById('listener-count').innerText = c.toLocaleString();
+        }, 5000);
+
+        setInterval(function() {
+            ['container-c7e50ada1d96860b5b0935a6466fa02f', 'container-c7e50ada1d96860b5b0935a6466fa02f_right', 'container-c7e50ada1d96860b5b0935a6466fa02f_mobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = el.innerHTML;
+            });
+        }, 120000);
     </script>
+    <script src="https://pl28724890.effectivegatecpm.com/4c/f0/38/4cf03868e9cda50f193126c9bc6d64d1.js"></script>
 </body>
 </html>
