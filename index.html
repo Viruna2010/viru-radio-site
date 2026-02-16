@@ -26,7 +26,6 @@
         .msg-user { background: rgba(0, 210, 255, 0.1); border-left: 3px solid #00d2ff; align-self: flex-start; }
         .msg-admin { background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; align-self: flex-start; }
         
-        /* අලුතින් එක් කළ Admin Badge එක */
         .admin-badge { font-size: 8px; background: #10b981; color: white; padding: 1px 5px; border-radius: 4px; margin-left: 5px; text-transform: uppercase; font-weight: bold; vertical-align: middle; }
         
         #play-overlay { 
@@ -55,7 +54,6 @@
         .live-pulse { animation: breathe 2s ease-in-out infinite; }
         @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* Professional Volume Control Styling */
         #volume-slider {
             -webkit-appearance: none;
             width: 100%; height: 6px;
@@ -99,6 +97,13 @@
             </div>
         </header>
 
+        <div class="w-full flex justify-center">
+            <div class="glass p-2 w-full flex justify-center overflow-hidden" style="min-height: 100px;">
+                <script async="async" data-cfasync="false" src="https://pl28724967.effectivegatecpm.com/c7e50ada1d96860b5b0935a6466fa02f/invoke.js"></script>
+                <div id="container-c7e50ada1d96860b5b0935a6466fa02f"></div>
+            </div>
+        </div>
+
         <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 lg:overflow-hidden">
             <div class="lg:col-span-8 flex flex-col space-y-3">
                 <div class="glass p-2 flex-1 flex flex-col relative overflow-hidden min-h-[300px] lg:min-h-0">
@@ -141,11 +146,6 @@
                             <button onclick="localStorage.clear(); location.reload();" class="text-[7px] text-slate-400 uppercase underline">Reset Name</button>
                             <div class="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-ping"></div>
                         </div>
-                    </div>
-
-                    <div class="p-2 border-b border-white/5 bg-black/20 flex justify-center overflow-hidden">
-                        <script async="async" data-cfasync="false" src="https://pl28724967.effectivegatecpm.com/c7e50ada1d96860b5b0935a6466fa02f/invoke.js"></script>
-                        <div id="container-c7e50ada1d96860b5b0935a6466fa02f"></div>
                     </div>
                     <div id="chat-messages" class="flex flex-col"></div>
                     <form onsubmit="handleSend(event)" class="p-3 bg-white/5 border-t border-white/5 flex gap-2 flex-shrink-0">
