@@ -21,8 +21,23 @@
             letter-spacing: 0.05em; 
             text-transform: uppercase;
         }
-        #chat-messages { flex: 1; overflow-y: auto; padding: 10px; scrollbar-width: thin; scrollbar-color: #00d2ff transparent; }
-        .msg { margin-bottom: 8px; padding: 8px 12px; border-radius: 12px; font-size: 13px; max-width: 85%; }
+        
+        /* PC Scroll Fix: Chat එක ඇතුළේ Scrollbar එක හරියට පේන්න සහ වැඩ කරන්න */
+        #chat-messages { 
+            flex: 1; 
+            overflow-y: auto !important; 
+            padding: 10px; 
+            scrollbar-width: thin; 
+            scrollbar-color: #00d2ff transparent; 
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+        }
+
+        #chat-messages::-webkit-scrollbar { width: 4px; }
+        #chat-messages::-webkit-scrollbar-thumb { background: #00d2ff; border-radius: 10px; }
+
+        .msg { margin-bottom: 8px; padding: 8px 12px; border-radius: 12px; font-size: 13px; max-width: 85%; word-wrap: break-word; }
         .msg-user { background: rgba(0, 210, 255, 0.1); border-left: 3px solid #00d2ff; align-self: flex-start; }
         .msg-admin { background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; align-self: flex-start; }
         
@@ -71,7 +86,6 @@
             box-shadow: 0 0 10px #00d2ff;
         }
 
-        /* --- Desktop Side Ads (වෙනස් නොකළ Original Style) --- */
         .side-ad { 
             position: fixed; 
             top: 50%; 
@@ -81,12 +95,12 @@
             z-index: 100; 
             display: none; 
         }
-        @media (min-width: 1200px) { .side-ad { display: block; } } /* Laptop screen වලත් පේන්න 1200px කළා */
+        @media (min-width: 1200px) { .side-ad { display: block; } }
         .side-ad-left { left: 15px; }
         .side-ad-right { right: 15px; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen lg:h-screen p-2 md:p-4 overflow-y-auto lg:overflow-hidden">
+<body class="flex flex-col min-h-screen p-2 md:p-4">
     <div id="particles-js"></div>
 
     <div class="side-ad side-ad-left glass p-1">
@@ -98,7 +112,7 @@
         <div id="container-c7e50ada1d96860b5b0935a6466fa02f_right"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto w-full h-full flex flex-col space-y-3">
+    <div class="max-w-7xl mx-auto w-full flex flex-col space-y-3">
         <header class="glass p-4 flex flex-col md:flex-row justify-between items-center shadow-xl flex-shrink-0">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-cyan-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/30">
@@ -121,10 +135,10 @@
             </div>
         </header>
 
-        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 lg:overflow-hidden">
+        <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 h-full">
             <div class="lg:col-span-8 flex flex-col space-y-3">
-                <div class="glass p-2 flex-1 flex flex-col relative overflow-hidden min-h-[300px] lg:min-h-0">
-                    <div class="relative flex-1 rounded-[1.2rem] overflow-hidden bg-black ring-1 ring-white/10 shadow-2xl h-[250px] lg:h-auto">
+                <div class="glass p-2 flex-1 flex flex-col relative overflow-hidden min-h-[350px]">
+                    <div class="relative flex-1 rounded-[1.2rem] overflow-hidden bg-black ring-1 ring-white/10 shadow-2xl min-h-[250px]">
                         <div id="play-overlay" onclick="startRadio()">
                             <div class="play-circle"><i class="fa-solid fa-play text-3xl text-white ml-1"></i></div>
                             <p class="mt-4 font-bold uppercase tracking-[0.3em] text-cyan-500 animate-pulse">Click to Listen Live</p>
@@ -165,7 +179,7 @@
                         </div>
                     </div>
 
-                    <div id="chat-messages" class="flex flex-col"></div>
+                    <div id="chat-messages"></div>
                     
                     <form onsubmit="handleSend(event)" class="p-3 bg-white/5 border-t border-white/5 flex gap-2 flex-shrink-0">
                         <input type="text" id="chat-input" placeholder="Type a message..." class="flex-1 bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-cyan-500 text-white">
@@ -265,14 +279,12 @@
             document.getElementById('listener-count').innerText = c.toLocaleString();
         }, 5000);
 
-        /* --- AUTO REFRESH ADS FUNCTION (ADDED) --- */
         setInterval(function() {
             const adContainers = [
                 'container-c7e50ada1d96860b5b0935a6466fa02f',
                 'container-c7e50ada1d96860b5b0935a6466fa02f_right',
                 'container-c7e50ada1d96860b5b0935a6466fa02f_mobile'
             ];
-            
             adContainers.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
@@ -281,8 +293,7 @@
                     el.innerHTML = content;
                 }
             });
-            console.log("Viru FM: Ads Refreshed for Safety");
-        }, 120000); // විනාඩි 2කට සැරයක් අලුත් වේ.
+        }, 120000);
     </script>
     <script src="https://pl28724890.effectivegatecpm.com/4c/f0/38/4cf03868e9cda50f193126c9bc6d64d1.js"></script>
 </body>
