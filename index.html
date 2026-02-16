@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon-blue: #00d2ff; --dark-bg: #020617; }
-        body { background-color: var(--dark-bg); color: white; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--dark-bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 1.5rem; }
         .header-title { 
@@ -71,11 +71,19 @@
             box-shadow: 0 0 10px #00d2ff;
         }
 
-        /* Desktop side ads style */
-        .side-ad { position: fixed; top: 50%; transform: translateY(-50%); width: 160px; height: 600px; z-index: 100; display: none; }
-        @media (min-width: 1600px) { .side-ad { display: block; } }
-        .side-ad-left { left: 20px; }
-        .side-ad-right { right: 20px; }
+        /* --- New Side Ads Styles --- */
+        .side-ad { 
+            position: fixed; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            width: 160px; 
+            height: 600px; 
+            z-index: 100; 
+            display: none; /* Desktop එකේ විතරක් පෙන්වන්න */
+        }
+        @media (min-width: 1550px) { .side-ad { display: block; } }
+        .side-ad-left { left: 15px; }
+        .side-ad-right { right: 15px; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen lg:h-screen p-2 md:p-4 overflow-y-auto lg:overflow-hidden">
@@ -147,14 +155,19 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-4 flex flex-col space-y-3 h-auto lg:h-auto">
-                <div class="glass flex-1 flex flex-col overflow-hidden shadow-xl border-t-2 border-t-cyan-500/20 h-[500px] lg:h-full">
+            <div class="lg:col-span-4 flex flex-col space-y-3 h-[500px] lg:h-auto">
+                <div class="glass flex-1 flex flex-col overflow-hidden shadow-xl border-t-2 border-t-cyan-500/20">
                     <div class="p-3 border-b border-white/5 bg-white/5 flex justify-between items-center flex-shrink-0">
                         <span class="text-[8px] font-black uppercase tracking-widest text-cyan-400">Viru Live Chat</span>
                         <div class="flex items-center gap-2">
                             <button onclick="localStorage.clear(); location.reload();" class="text-[7px] text-slate-400 uppercase underline">Reset Name</button>
                             <div class="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-ping"></div>
                         </div>
+                    </div>
+
+                    <div class="hidden lg:flex p-2 border-b border-white/5 bg-black/20 justify-center overflow-hidden">
+                        <script async="async" data-cfasync="false" src="https://pl28724967.effectivegatecpm.com/c7e50ada1d96860b5b0935a6466fa02f/invoke.js"></script>
+                        <div id="container-c7e50ada1d96860b5b0935a6466fa02f_inner"></div>
                     </div>
 
                     <div id="chat-messages" class="flex flex-col"></div>
@@ -165,14 +178,15 @@
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </form>
-                </div>
 
-                <div class="lg:hidden glass p-2 flex justify-center overflow-hidden min-h-[100px]">
-                    <script async="async" data-cfasync="false" src="https://pl28724967.effectivegatecpm.com/c7e50ada1d96860b5b0935a6466fa02f/invoke.js"></script>
-                    <div id="container-c7e50ada1d96860b5b0935a6466fa02f_mobile"></div>
+                    <div class="lg:hidden p-2 border-t border-white/5 bg-black/20 flex justify-center">
+                        <script async="async" data-cfasync="false" src="https://pl28724967.effectivegatecpm.com/c7e50ada1d96860b5b0935a6466fa02f/invoke.js"></script>
+                        <div id="container-c7e50ada1d96860b5b0935a6466fa02f_mobile"></div>
+                    </div>
                 </div>
             </div>
         </main>
+        
         <footer class="text-center py-2 flex-shrink-0">
             <p class="text-[8px] font-black uppercase tracking-[0.6em] text-cyan-500/80">© 2026 VIRU FM • ALL RIGHTS RESERVED</p>
         </footer>
@@ -231,20 +245,11 @@
             volText.innerText = e.target.value + '%';
         });
 
-        function handleSend(e) {
-            e.preventDefault();
-            sendMessage();
-        }
-
+        function handleSend(e) { e.preventDefault(); sendMessage(); }
         function sendMessage() {
             const input = document.getElementById('chat-input');
             if(input.value.trim() !== "") {
-                db.ref("messages").push().set({ 
-                    name: userName, 
-                    message: input.value, 
-                    time: Date.now(),
-                    is_admin: isAdmin
-                });
+                db.ref("messages").push().set({ name: userName, message: input.value, time: Date.now(), is_admin: isAdmin });
                 input.value = "";
             }
         }
@@ -265,8 +270,6 @@
             document.getElementById('listener-count').innerText = c.toLocaleString();
         }, 5000);
     </script>
-
     <script src="https://pl28724890.effectivegatecpm.com/4c/f0/38/4cf03868e9cda50f193126c9bc6d64d1.js"></script>
-
 </body>
 </html>
